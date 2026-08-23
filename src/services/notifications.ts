@@ -43,11 +43,14 @@ export interface ScheduleOptions {
   minutes: IntervalMinutes;
   body: string;
   sound?: string | undefined;
+  /** معرّف الصوت للتشغيل في المتصفح: salawat | chime | silent */
+  soundId?: SoundId;
 }
 
 export async function schedule(options: ScheduleOptions): Promise<void> {
   if (!isBrowser()) return;
   await cancelAll();
+  const soundId: SoundId = options.soundId ?? "salawat";
 
   if (isNative()) {
     const mod = await loadNative();
@@ -78,19 +81,24 @@ export async function schedule(options: ScheduleOptions): Promise<void> {
     }
   }
 
+  // في المتصفح: نفتح قناة الصوت الآن (نحن داخل تفاعل المستخدم) ثم نُشغّل الصوت مع كل تذكير
+  await unlockAudio();
   const granted = await requestPermission();
-  if (!granted) return;
   webTimer = setInterval(
     () => {
-      try {
-        new Notification("تِبْيَان", { body: options.body });
-      } catch {
-        // تم إغلاق الصلاحية
+      void playReminderSound(soundId);
+      if (granted) {
+        try {
+          new Notification("تِبْيَان", { body: options.body });
+        } catch {
+          // تم إغلاق الصلاحية
+        }
       }
     },
     options.minutes * 60 * 1000,
   );
 }
+
 
 export async function cancelAll(): Promise<void> {
   if (webTimer) {
