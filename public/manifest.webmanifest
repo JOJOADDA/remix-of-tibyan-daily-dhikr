@@ -1,0 +1,23 @@
+{
+  "name": "تِبْيَان — الصلاة على النبي ﷺ",
+  "short_name": "تِبْيَان",
+  "description": "مسبحة لمسية وتنبيهات دورية بالصلاة على النبي ﷺ، تعمل دون اتصال بالإنترنت.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf7f0",
+  "theme_color": "#0a5c3f",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
