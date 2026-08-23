@@ -1,3 +1,5 @@
+import { playReminderSound, unlockAudio, type SoundId } from "./sound";
+
 // طبقة التنبيهات: تستخدم Capacitor Local Notifications على الجهاز، وWeb Notifications في المعاينة.
 export const INTERVALS = [5, 15, 30, 60, 120] as const;
 export type IntervalMinutes = (typeof INTERVALS)[number];
