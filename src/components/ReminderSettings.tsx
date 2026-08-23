@@ -2,6 +2,7 @@ import { BellRing, BellOff, Volume2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { INTERVALS, cancelAll, schedule, type IntervalMinutes } from "@/services/notifications";
 import { impact } from "@/services/haptics";
+import { playReminderSound, unlockAudio, type SoundId } from "@/services/sound";
 
 const SOUNDS = [
   { id: "salawat", label: "صلاة هادئة" },
@@ -33,11 +34,13 @@ export function ReminderSettings() {
 
   const apply = async (nextEnabled: boolean, nextMinutes: IntervalMinutes) => {
     void impact("light");
+    await unlockAudio();
     if (nextEnabled) {
       await schedule({
         minutes: nextMinutes,
         body: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",
         sound: sound === "silent" ? undefined : `${sound}.wav`,
+        soundId: sound as SoundId,
       });
     } else {
       await cancelAll();
@@ -136,6 +139,7 @@ export function ReminderSettings() {
               onClick={() => {
                 setSound(item.id);
                 void impact("light");
+                void playReminderSound(item.id as SoundId);
                 if (enabled) void apply(true, minutes);
               }}
               className={`flex items-center justify-between rounded-xl border px-4 py-3 text-xs transition-transform active:scale-[0.98] ${
