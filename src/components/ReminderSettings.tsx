@@ -5,7 +5,7 @@ import { impact } from "@/services/haptics";
 import { playReminderSound, unlockAudio, type SoundId } from "@/services/sound";
 
 const SOUNDS = [
-  { id: "salawat", label: "صلاة هادئة" },
+  { id: "salawat", label: "نغمة + نطق: صلِّ على محمد" },
   { id: "chime", label: "نغمة ندى" },
   { id: "silent", label: "بدون صوت" },
 ];
@@ -153,6 +153,17 @@ export function ReminderSettings() {
             </button>
           ))}
         </div>
+
+        <button
+          type="button"
+          onClick={() => {
+            void impact("light");
+            void playReminderSound(sound as SoundId);
+          }}
+          className="mt-4 w-full rounded-xl border border-tibyan-green-600/50 py-3 text-xs font-semibold text-tibyan-green-600 transition-transform active:scale-[0.98] dark:border-tibyan-green-emerald/50 dark:text-tibyan-green-emerald"
+        >
+          تجربة الصوت الآن
+        </button>
       </section>
 
       <p className="mt-6 text-center text-[10px] leading-relaxed text-tibyan-subtle-light/80 dark:text-tibyan-subtle-dark/80">
