@@ -5,7 +5,7 @@ import { impact } from "@/services/haptics";
 import { playReminderSound, unlockAudio, type SoundId } from "@/services/sound";
 
 const SOUNDS = [
-  { id: "salawat", label: "نغمة + نطق: صلِّ على محمد" },
+  { id: "salawat", label: "الذكر بصوت واضح: اللهم صل وسلم على نبينا محمد" },
   { id: "chime", label: "نغمة ندى" },
   { id: "silent", label: "بدون صوت" },
 ];
@@ -39,7 +39,7 @@ export function ReminderSettings() {
       await schedule({
         minutes: nextMinutes,
         body: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",
-        sound: sound === "silent" ? undefined : `${sound}.wav`,
+        sound: sound === "silent" ? undefined : `${sound}.mp3`,
         soundId: sound as SoundId,
       });
     } else {
@@ -167,7 +167,7 @@ export function ReminderSettings() {
       </section>
 
       <p className="mt-6 text-center text-[10px] leading-relaxed text-tibyan-subtle-light/80 dark:text-tibyan-subtle-dark/80">
-        على أجهزة أندرويد تُجدول التنبيهات بدقة عبر نظام التشغيل بعد تغليف التطبيق.
+        الصوت مُضمَّن داخل التطبيق ويعمل دون إنترنت. على أندرويد تُجدول التنبيهات عبر نظام التشغيل.
       </p>
     </div>
   );
