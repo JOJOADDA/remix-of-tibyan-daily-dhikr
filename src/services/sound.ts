@@ -117,14 +117,17 @@ export function speakSalawat(): boolean {
   }
 }
 
-/** تشغيل صوت التنبيه حسب الاختيار. */
+/** تشغيل صوت التنبيه حسب الاختيار. ملف salawat.mp3 يحتوي النغمة + الصوت البشري للذكر. */
 export async function playReminderSound(sound: SoundId): Promise<void> {
   if (sound === "silent") return;
   const played = await playFile(FILES[sound]);
-  if (!played) await playChime();
+  if (played) return;
+  // بديل عند تعذّر تشغيل الملف فقط
+  await playChime();
   if (sound === "salawat") {
     window.setTimeout(() => {
       speakSalawat();
     }, 1500);
   }
 }
+
