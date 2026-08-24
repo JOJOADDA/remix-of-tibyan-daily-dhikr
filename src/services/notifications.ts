@@ -65,7 +65,7 @@ export async function schedule(options: ScheduleOptions): Promise<void> {
               id: 1,
               title: "تِبْيَان",
               body: options.body,
-              sound: options.sound ?? "salawat.wav",
+              sound: options.sound ?? "salawat.mp3",
               channelId: "tibyan_salawat",
               schedule: {
                 every: "minute",
