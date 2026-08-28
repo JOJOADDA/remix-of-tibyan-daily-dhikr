@@ -195,3 +195,56 @@
     color: var(--color-tibyan-ink-dark);
   }
 }
+
+/* ===== Safe areas & responsive app shell (Android/iOS gesture bars) ===== */
+:root {
+  /* المساحات الآمنة للنظام (شريط الإيماءات / أزرار التنقل) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  /* ارتفاع شريط التنقل السفلي داخل التطبيق */
+  --app-nav-height: 3.5rem;
+  /* المسافة المطلوبة أسفل المحتوى حتى لا يُغطّيه الشريط ولا أزرار النظام */
+  --app-content-bottom: calc(var(--app-nav-height) + var(--safe-bottom) + 2.25rem);
+}
+
+@layer base {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    min-height: 100svh;
+  }
+}
+
+/* ارتفاع الشاشة الفعلي على الهواتف (يتجاوب مع شرائط المتصفح) */
+@utility app-screen {
+  min-height: 100svh;
+  min-height: 100dvh;
+}
+
+/* حشوة سفلية آمنة للمحتوى القابل للتمرير */
+@utility pb-app {
+  padding-bottom: var(--app-content-bottom);
+}
+
+@utility pt-safe {
+  padding-top: calc(var(--safe-top) + 0.5rem);
+}
+
+@utility pb-safe {
+  padding-bottom: var(--safe-bottom);
+}
+
+@utility px-safe {
+  padding-left: max(var(--safe-left), 1.25rem);
+  padding-right: max(var(--safe-right), 1.25rem);
+}
+
+/* موضع شريط التنقل فوق أزرار النظام دائماً */
+@utility bottom-safe-nav {
+  bottom: calc(var(--safe-bottom) + 0.75rem);
+}
