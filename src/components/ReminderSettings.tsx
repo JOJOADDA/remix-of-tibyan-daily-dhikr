@@ -5,7 +5,7 @@ import { impact } from "@/services/haptics";
 import { playReminderSound, unlockAudio, type SoundId } from "@/services/sound";
 
 const SOUNDS = [
-  { id: "salawat", label: "بصوت الشيخ سهيل الخطيب: وصلى الله على سيدنا محمد" },
+  { id: "salawat", label: "بصوت الشيخ مشاري العفاسي: اللهم صل وسلم على نبينا محمد" },
   { id: "chime", label: "نغمة ندى" },
   { id: "silent", label: "بدون صوت" },
 ];
