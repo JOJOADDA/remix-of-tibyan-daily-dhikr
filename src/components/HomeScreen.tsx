@@ -1,5 +1,6 @@
 import { RotateCcw, Sparkles, Vibrate, VibrateOff } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { DHIKR_LIST } from "@/data/dhikr";
 import { impact } from "@/services/haptics";
 
@@ -18,14 +19,25 @@ export function HomeScreen() {
   useEffect(() => {
     const saved = window.localStorage.getItem("tibyan_current_count");
     const savedTotal = window.localStorage.getItem("tibyan_total_count");
+    const savedHaptic = window.localStorage.getItem("tibyan_haptic_enabled");
+    const savedIndex = Number(window.localStorage.getItem("tibyan_dhikr_index"));
     if (saved) setCount(parseInt(saved, 10) || 0);
     if (savedTotal) setTotalCount(parseInt(savedTotal, 10) || 0);
+    if (savedHaptic !== null) setHapticEnabled(savedHaptic === "1");
+    if (Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < DHIKR_LIST.length) {
+      setActiveDhikrIndex(savedIndex);
+    }
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem("tibyan_current_count", count.toString());
     window.localStorage.setItem("tibyan_total_count", totalCount.toString());
   }, [count, totalCount]);
+
+  useEffect(() => {
+    window.localStorage.setItem("tibyan_haptic_enabled", hapticEnabled ? "1" : "0");
+    window.localStorage.setItem("tibyan_dhikr_index", String(activeDhikrIndex));
+  }, [hapticEnabled, activeDhikrIndex]);
 
   const triggerHaptic = useCallback(
     (isTargetReached: boolean) => {
@@ -53,6 +65,7 @@ export function HomeScreen() {
   const toggleDhikr = () => {
     setActiveDhikrIndex((prev) => (prev + 1) % DHIKR_LIST.length);
     setCount(0);
+    void impact("light");
   };
 
   const circumference = 276.46;
@@ -60,7 +73,7 @@ export function HomeScreen() {
   return (
     <div
       onClick={handleScreenTap}
-      className="relative flex min-h-screen w-full cursor-pointer select-none flex-col justify-between overflow-hidden bg-tibyan-canvas-light p-6 font-sans transition-colors duration-500 dark:bg-tibyan-canvas-dark"
+      className="app-screen px-safe pt-safe relative flex w-full cursor-pointer select-none flex-col justify-between overflow-hidden bg-tibyan-canvas-light font-sans transition-colors duration-500 dark:bg-tibyan-canvas-dark"
     >
       <header className="z-10 flex items-center justify-between pt-2">
         <div className="flex items-center gap-2">
@@ -75,9 +88,17 @@ export function HomeScreen() {
         </div>
 
         <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+          <ThemeToggle />
+
           <button
             type="button"
-            onClick={() => setHapticEnabled(!hapticEnabled)}
+            onClick={() => {
+              const next = !hapticEnabled;
+              setHapticEnabled(next);
+              if (next) void impact("medium");
+            }}
+            aria-pressed={hapticEnabled}
+            aria-label="الاهتزاز اللمسي"
             title="الاهتزاز اللمسي"
             className="rounded-full border border-tibyan-border-light bg-tibyan-surface-light p-2.5 text-tibyan-subtle-light shadow-tactile transition-transform active:scale-90 dark:border-tibyan-border-dark dark:bg-tibyan-surface-dark dark:text-tibyan-subtle-dark dark:shadow-tactile-dark"
           >
@@ -91,6 +112,7 @@ export function HomeScreen() {
           <button
             type="button"
             onClick={handleReset}
+            aria-label="إعادة ضبط العداد"
             title="إعادة ضبط العداد"
             className="rounded-full border border-tibyan-border-light bg-tibyan-surface-light p-2.5 text-tibyan-subtle-light shadow-tactile transition-transform active:scale-90 dark:border-tibyan-border-dark dark:bg-tibyan-surface-dark dark:text-tibyan-subtle-dark dark:shadow-tactile-dark"
           >
@@ -99,7 +121,7 @@ export function HomeScreen() {
         </div>
       </header>
 
-      <main className="z-10 mx-auto my-auto flex max-w-lg flex-1 flex-col items-center justify-center text-center">
+      <main className="z-10 mx-auto my-auto flex w-full max-w-lg flex-1 flex-col items-center justify-center py-4 text-center">
         <button
           type="button"
           onClick={(e) => {
@@ -118,7 +140,7 @@ export function HomeScreen() {
           </p>
         </div>
 
-        <div className="relative my-2 flex h-64 w-64 items-center justify-center">
+        <div className="relative my-2 flex aspect-square w-full max-w-[16rem] items-center justify-center">
           <svg className="h-full w-full -rotate-90 transform" viewBox="0 0 100 100">
             <circle
               cx="50"
@@ -148,7 +170,7 @@ export function HomeScreen() {
               isPressed ? "scale-95" : "scale-100"
             }`}
           >
-            <span className="font-sans text-6xl font-light tracking-tighter text-tibyan-ink-light dark:text-tibyan-ink-dark">
+            <span className="font-sans text-5xl sm:text-6xl font-light tracking-tighter text-tibyan-ink-light dark:text-tibyan-ink-dark">
               {count}
             </span>
             <span className="mt-1 text-xs font-medium text-tibyan-subtle-light dark:text-tibyan-subtle-dark">
@@ -162,7 +184,7 @@ export function HomeScreen() {
         </p>
       </main>
 
-      <footer className="z-10 flex items-center justify-between border-t border-tibyan-border-light/60 pb-24 pt-4 text-xs dark:border-tibyan-border-dark/60">
+      <footer className="pb-app z-10 flex items-center justify-between border-t border-tibyan-border-light/60 pt-4 text-xs dark:border-tibyan-border-dark/60">
         <div className="flex flex-col">
           <span className="text-[10px] text-tibyan-subtle-light dark:text-tibyan-subtle-dark">
             مجموع الصلوات

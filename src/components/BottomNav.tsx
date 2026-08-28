@@ -1,5 +1,6 @@
 import { BookOpen, Compass, Settings } from "lucide-react";
 import type React from "react";
+import { impact } from "@/services/haptics";
 
 export type TabType = "counter" | "library" | "settings";
 
@@ -23,7 +24,7 @@ export function BottomNav({
   onTabChange: (tab: TabType) => void;
 }) {
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4 font-sans">
+    <div className="bottom-safe-nav pointer-events-none fixed inset-x-0 z-50 flex justify-center px-4 font-sans">
       <nav
         dir="rtl"
         className="pointer-events-auto flex items-center gap-1.5 rounded-full border border-tibyan-border-light/80 bg-tibyan-surface-light/85 p-1.5 shadow-tactile backdrop-blur-md transition-all duration-300 dark:border-tibyan-border-dark/80 dark:bg-tibyan-surface-dark/85 dark:shadow-tactile-dark"
@@ -36,7 +37,12 @@ export function BottomNav({
             <button
               key={item.id}
               type="button"
-              onClick={() => onTabChange(item.id)}
+              onClick={() => {
+                void impact("light");
+                onTabChange(item.id);
+              }}
+              aria-current={isActive ? "page" : undefined}
+              aria-label={item.label}
               className={`relative flex select-none items-center gap-2 rounded-full px-4 py-2.5 text-xs font-medium transition-all duration-300 ease-out active:scale-95 ${
                 isActive
                   ? "bg-tibyan-green-600 text-tibyan-ink-dark shadow-sm dark:bg-tibyan-green-700"
