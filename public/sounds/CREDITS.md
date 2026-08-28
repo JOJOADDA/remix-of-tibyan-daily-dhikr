@@ -2,19 +2,19 @@
 
 ## salawat.mp3 و voice-salawat.mp3
 
-- **العبارة:** «وصلى الله على سيدنا محمد النبي الأُمّي وعلى آله وصحبه أجمعين»
-- **القارئ / Reciter:** Shaikh Suhail Alkhatib (الشيخ سهيل الخطيب)
-- **المصدر الرسمي / Source:** Internet Archive — item `1.Salawat-Sh.Suhail`
-  - صفحة العنصر: https://archive.org/details/1.Salawat-Sh.Suhail
-  - الملف الأصلي: https://archive.org/download/1.Salawat-Sh.Suhail/01.mp3
-  - بيانات الترخيص (API): https://archive.org/metadata/1.Salawat-Sh.Suhail
-- **الترخيص / License:** Creative Commons CC0 1.0 Universal (Public Domain Dedication)
-  - https://creativecommons.org/publicdomain/zero/1.0/
-  - يسمح بالاستخدام والتعديل والتوزيع تجاريًا وغير تجاريًا دون شروط، ولا يُشترط الإسناد
-    (Attribution is not required; retained here voluntarily out of respect for the reciter.)
-- **المعالجة / Processing:** استخراج المقطع 03.05s–08.40s من التسجيل الأصلي، تلاشي عند البداية والنهاية،
-  وتطبيع مستوى الصوت (EBU R128, I=-16 LUFS). لا يوجد أي توليد صوتي بالذكاء الاصطناعي.
-- `voice-salawat.mp3` = الصوت فقط (5.35s) — `salawat.mp3` = نغمة تنبيه + الصوت (6.95s).
+- **العبارة:** «اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ»
+- **القارئ / Reciter:** الشيخ مشاري راشد العفاسي (Mishari Rashid Alafasy)
+- **المصدر / Source:** Internet Archive — item `zakrny_20190306`
+  - صفحة العنصر: https://archive.org/details/zakrny_20190306
+  - الملف الأصلي: https://archive.org/download/zakrny_20190306/اللهم%20صل%20وسلم%20على%20نبينا%20محمد%20(مشاري).mp3
+  - بيانات العنصر (API): https://archive.org/metadata/zakrny_20190306
+- **الترخيص / License:** التسجيل من الأدعية الصوتية المنشورة رسميًا للشيخ مشاري العفاسي
+  والمتاحة للتحميل والاستماع المجاني عبر موقعه الرسمي وخدماته الصوتية؛
+  نسخة أرشيف الإنترنت رُفعت بدون قيد ترخيصي (رفع عام للمشاركة).
+  عند النشر التجاري يُستحسن مراجعة الموقع الرسمي للشيخ (alafasy.me).
+- **المعالجة / Processing:** تطبيع مستوى الصوت (EBU R128, I=-16 LUFS) مع تلاشي عند البداية والنهاية.
+  لا يوجد أي توليد صوتي بالذكاء الاصطناعي.
+- `voice-salawat.mp3` = الصوت فقط (13.45s) — `salawat.mp3` = نغمة تنبيه + الصوت (15.25s).
 
 ## chime.mp3
 
