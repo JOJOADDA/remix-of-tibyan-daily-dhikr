@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { INTERVALS, cancelAll, schedule, type IntervalMinutes } from "@/services/notifications";
 import { impact } from "@/services/haptics";
 import { playReminderSound, unlockAudio, type SoundId } from "@/services/sound";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const SOUNDS = [
   { id: "salawat", label: "بصوت الشيخ مشاري العفاسي: اللهم صل وسلم على نبينا محمد" },
@@ -48,7 +49,10 @@ export function ReminderSettings() {
   };
 
   return (
-    <div className="mx-auto max-w-lg px-5 pb-28 pt-12">
+    <div className="app-screen px-safe pb-app mx-auto max-w-lg pt-12">
+      <div className="mb-2 flex justify-end">
+        <ThemeToggle />
+      </div>
       <header className="mb-8 text-center">
         <h1 className="font-amiri text-3xl text-tibyan-green-600 dark:text-tibyan-green-emerald">
           تَنْبِيهَاتُ الذِّكْر

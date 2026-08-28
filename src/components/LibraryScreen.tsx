@@ -1,5 +1,6 @@
 import { Check, Copy, Share2 } from "lucide-react";
 import { useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { LIBRARY } from "@/data/dhikr";
 import { impact } from "@/services/haptics";
 
@@ -30,7 +31,10 @@ export function LibraryScreen() {
   };
 
   return (
-    <div className="mx-auto max-w-lg px-5 pb-28 pt-12">
+    <div className="app-screen px-safe pb-app mx-auto max-w-lg pt-12">
+      <div className="mb-2 flex justify-end">
+        <ThemeToggle />
+      </div>
       <header className="mb-8 text-center">
         <h1 className="font-amiri text-3xl text-tibyan-green-600 dark:text-tibyan-green-emerald">
           رَوْضَةُ الأَذْكَار
